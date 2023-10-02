@@ -26,7 +26,7 @@ def play_audio(path):
 
 
 def play_video(total_frames):
-    # os.system('color F0')
+
     os.system('mode 150, 500')
 
     timer = fpstimer.FPSTimer(30)
@@ -37,13 +37,11 @@ def play_video(total_frames):
         sys.stdout.write("\r" + ASCII_LIST[frame_number])
         timer.sleep()
 
-    # os.system('color 07')
-
 
 # Extract frames from video
 def extract_transform_generate(video_path, start_frame, number_of_frames=1000):
     capture = cv2.VideoCapture(video_path)
-    capture.set(1, start_frame)  # Points cap to target frame
+    capture.set(1, start_frame)
     current_frame = start_frame
     frame_count = 1
     ret, image_frame = capture.read()
@@ -64,8 +62,8 @@ def extract_transform_generate(video_path, start_frame, number_of_frames=1000):
 
         progress_bar(frame_count, number_of_frames)
 
-        frame_count += 1  # increases internal frame counter
-        current_frame += 1  # increases global frame counter
+        frame_count += 1
+        current_frame += 1
 
     capture.release()
 
@@ -92,7 +90,6 @@ def resize_image(image_frame):
     return resized_image
 
 
-# Greyscale
 def greyscale(image_frame):
     return image_frame.convert("L")
 
@@ -111,7 +108,7 @@ def ascii_generator(image_path, start_frame, number_of_frames):
         path_to_image = image_path + '/BadApple_' + str(current_frame) + '.jpg'
         image = Image.open(path_to_image)
         ascii_characters = pixels_to_ascii(
-            greyscale(resize_image(image)))  # get ascii characters
+            greyscale(resize_image(image)))
         pixel_count = len(ascii_characters)
         ascii_image = "\n".join(
             [ascii_characters[index:(index + frame_size)] for index in range(0, pixel_count, frame_size)])
@@ -169,7 +166,7 @@ def main():
             '==============================================================\n')
 
         user_input = str(input("Your option: "))
-        user_input.strip()  # removes trailing whitespaces
+        user_input.strip()
 
         if user_input == '1':
             user_input = str(
